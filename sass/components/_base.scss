@@ -1,0 +1,150 @@
+
+body {
+  font-family: Comfortaa, Verdana, sans-serif;
+  background: black;
+  color: white;
+}
+
+input {
+  background-color: black;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  text-align: center;
+  height: 40px;
+  width: 160px;
+  font-size: 16px;
+}
+
+#inform {
+  text-align: center;
+}
+
+#message {
+  text-align: justify;
+  margin: 0 auto;
+  height: 200px;
+  width: 40%;
+  margin: 10% 30%;
+}
+::-webkit-input-placeholder {color: white;}
+:-moz-placeholder {color: white;}
+::-moz-placeholder {color: white;}
+:-ms-input-placeholder {color: white;}
+
+#login {
+  display: none;
+  font-size: 34px;
+  color: white;
+  margin: 0 auto;
+  height: 200px;
+  width: 20%;
+  margin: 10% 40%;
+}
+
+#theme {
+  display: none;
+  font-size: 34px;
+  color: white;
+  margin: 0 auto;
+  height: 200px;
+  width: 20%;
+  margin: 10% 40%;
+}
+
+
+#go {
+  display: none;
+  background: white;
+  color: $black;
+  text-align: center;
+  margin: 0 auto;
+  height: 100px;
+  width: 30%;
+  margin: 10% 35%;
+  border-radius: 10px;
+  padding-top: 20px;
+  font-size: 20px;
+}
+
+#main {
+  display: none;
+  height: 500px;
+  width: 100%;
+  text-align: center;
+  background-color: #d3d3d3;
+  background: $black;
+  background-size: cover;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+#above {
+  height: 40px;
+  font-size: 36px;
+  margin: 0 0 5px 0;
+  padding: 0;
+}
+
+#below {
+  display: none;
+  height: 30px;
+  font-size: 20px;
+}
+
+#user {
+  margin-top: 5px;
+  margin-left: 5%;
+  width: 70%;
+	float: left;
+}
+
+#level {
+  margin-top: 5px;
+  width: 11%;
+  float: right;
+}
+
+.orb {
+  display: inline-block;
+  background: black;
+  border-radius: 50%;
+  height: 8%;
+  width: 8%;
+  margin: 200px 37px;
+  background: radial-gradient(circle at 30px 30px, #dddddd, #000);
+  opacity: .5;
+}
+
+#orb1 {
+  @include orbs (#0000FF)
+}
+
+#orb2 {
+@include orbs (#7F00FF)
+}
+
+#orb3 {
+@include orbs (#FF00FF)
+}
+
+#orb4 {
+@include orbs (#FF0000)
+}
+
+#orb5 {
+@include orbs (#FF9000)
+}
+
+#orb6 {
+@include orbs (#FFFF00)
+}
+
+#orb7 {
+@include orbs (#FF007F)
+}

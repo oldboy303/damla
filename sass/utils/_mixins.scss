@@ -1,0 +1,11 @@
+@mixin orbs ($color: #dddddd) {
+  display: inline-block;
+  background: black;
+  border-radius: 50%;
+  border: 1px solid white;
+  height: 100px;
+  width: 100px;
+  margin: 16.2% 2%;
+  background: radial-gradient(circle at 30px 30px, $color, #000);
+  opacity: .5;
+}
