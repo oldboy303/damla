@@ -6,13 +6,15 @@ $(function() {
     this.lastScore = 0;
   };
 
-  var user = {};
-
+  var user = {
+    name: 'san',
+  };
+  console.log(user.name);
   var theme = '';
 
   var getImage = function() {
     $.ajax({
-      url: 'http://api.pixplorer.co.uk/image?word=' + 'hi-res landscape' + '&amount=1&size=l',
+      url: 'http://api.pixplorer.co.uk/image?word=hi-res' + theme + '&amount=1&size=l',
       type: 'GET',
       dataType: 'json',
       success: function(res) {
@@ -21,7 +23,7 @@ $(function() {
       }
     });
   };
-  
+
   $('#message').click(function() {
     $(this).hide('slow');
     $('#login').show('slow');
@@ -39,18 +41,29 @@ $(function() {
       $('#email').focus();
     } else if (localStorage.getItem(name)) {
       user = localStorage.getItem(name);
+      $(this).hide();
+      $('#theme').show();
     } else {
       user = new Player (name, email);
       localStorage.setItem(name, JSON.stringify(user));
+      $(this).hide();
+      $('#theme').show();
     }
-    $(this).hide();
-    $('#theme').show();
+
   });
 
-  $('#theme').click(function(){
-    damla.startGame();
-  });
 
+  $('.themes').click(function(){
+    console.log(localStorage.getItem(user));
+    theme = $(this).val();
+    console.log($(this).val());
+    getImage();
+    $('#below').show('slow');
+    $('#theme').hide('slow');
+    setTimeout(function() {
+      damla.startGame();
+    }, 3000)
+  });
 
   var damla = {
     level: 1,
@@ -58,8 +71,89 @@ $(function() {
     userSeq: [],
 
     startGame: function() {
+      $('#user').text('user: ' + user.name);
+      $('#level').text('level: ' + this.level);
+      $('#go').hide();
+      $('#main').show();
+      this.seq = [];
+      this.userSeq = [];
+      this.seqGen();
+    },
+
+    seqGen: function() {
+      for (var i = 0; i < this.level; i++) {
+        var random = Math.floor(Math.random() * 7);
+        (this.seq).push([1, 2, 3, 4, 5, 6, 7][random]);
+      }
+      this.displaySeq();
+    },
+
+    displaySeq: function() {
+      var seqArr = $(this.seq);
+      var i = 0;
+      var self = this;
+      var intervalId = setInterval(function() {
+        if (seqArr[i]) {
+          $('.orb[data-orb=' + seqArr[i] + ']').animate({'opacity': '1'}).delay(300).animate({'opacity': '.5'});
+          self.tones(seqArr[i]);
+          i++;
+        } else {
+          window.clearInterval(intervalId);
+          self.userInput();
+        }
+      }, 1200);
+    },
+
+    userInput: function() {
+      var self = this;
+      $('.orb').on('click', function() {
+        $(this).animate({'opacity': '1'});$(this).animate({'opacity': '.5'});
+        self.tones($(this).data('orb'));
+        (self.userSeq).push($(this).data('orb'));
+        if ((self.userSeq).length === (self.seq).length) {
+          $('.orb').off('click');
+          self.compareSeq();
+
+        };
+      });
+    },
+    compareSeq: function() {
+      if ((this.seq).join('') === (this.userSeq).join('')) {
+        this.levelUp();
+      } else {
+        this.gameOver();
+      }
+    },
+
+    levelUp: function() {
+      this.level += 1;
+      this.seq = [];
+      this.userSeq = [];
+      $('#level').text('level : ' + this.level);
+      getImage();
+      setTimeout(function(){
+        damla.seqGen();
+      },2000);
+      $(".orb").off('click');
+    },
+
+    gameOver: function() {
+      var self = this;
+      $('#main').hide();
+      $('#go').show('slow').text('great job ' + player.name + '! you made it to level ' + this.level + ' last time you made it to level ' + player.lastScore + '. click this message to play again');
+      this.level = 1;
+      $(".orb").off('click');
 
     },
+
+    tones: function(orb) {
+      var tone = $('<audio autoplay></audio>');
+				tone.append('<source src="sounds/' + theme + '/' + orb + '.ogg" type="audio/ogg" />');
+				tone.append('<source src="sounds/' + theme + '/' + orb + '.mp3" type="audio/mp3" />');
+				$('[data-orb = ' + orb +']').html(tone);
+    },
+
+
   };
 
 });
