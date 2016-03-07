@@ -37,7 +37,6 @@ $(function() {
       $('#email').focus();
     }  else if (localStorage.getItem(name)) {
       $('#theme').prepend('welcome back ' + name + '! <br> please pick a theme:');
-
     } else {
       $('#theme').prepend(name + ', thanks for checking out damla! <br> please pick a theme:');
     }
@@ -54,6 +53,11 @@ $(function() {
     setTimeout(function() {
       damla.startGame();
     }, 3000)
+    if (theme === 'space') {
+      $('#main, #go, body, input').css({'background':'black', 'color':'white'})
+    } else {
+      $('#main, #go, body, input').css({'background':'green', 'color':'white'})
+    }
   });
 
   var damla = {
@@ -109,7 +113,7 @@ $(function() {
         };
       });
     },
-    
+
     compareSeq: function() {
       if ((this.seq).join('') === (this.userSeq).join('')) {
         this.levelUp();

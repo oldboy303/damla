@@ -4,7 +4,7 @@ body {
   color: black; }
 
 input {
-  background-color: white;
+  background: white;
   border: none;
   border-radius: 5px;
   color: black;
