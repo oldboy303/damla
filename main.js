@@ -78,6 +78,7 @@ $(function() {
       $('#go').off('click');
       $('#go').hide('slow');
       $('#main').show('slow');
+      this.level = 1;
       this.seq = [];
       this.userSeq = [];
       this.seqGen();
@@ -116,7 +117,6 @@ $(function() {
         if ((self.userSeq).length === (self.seq).length) {
           $('.orb').off('click');
           self.compareSeq();
-
         };
       });
     },
@@ -145,8 +145,8 @@ $(function() {
       var self = this;
       $('#main').hide();
       $('#below').hide();
-      $('#go').show('slow').text('great job ' + 'san' + '! you made it to level ' + this.level + ' last time you made it to level ' + '. click this message to play again');
-      this.level = 1;
+      $('#go').show('slow').text('great job ' + 'san' + '! you made it to level ' + this.level + ' last time you made it to level ' + currentPlayer.lastScore + '. click this message to play again');
+      currentPlayer.lastScore = this.level;
       $('#go').click(function(){
         self.startGame();
       })
@@ -158,7 +158,6 @@ $(function() {
 				tone.append('<source src="sounds/' + theme + '/' + orb + '.mp3" type="audio/mp3" />');
 				$('[data-orb = ' + orb +']').html(tone);
     },
-
 
   };
 
