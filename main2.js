@@ -16,8 +16,11 @@ $(function() {
       $('#name').focus();
     } else if (!emailRegex.test(email) || email.length === 0) {
       $('#email').focus();
-    }  else {
-      
+    }  else if (localStorage.getItem(name)) {
+      $('#theme').prepend('welcome back ' + name + '! <br> please pick a theme:');
+
+    } else {
+      $('#theme').prepend(name + ', thanks for checking out damla! <br> please pick a theme:');
     }
     $(this).hide();
     $('#theme').show();

@@ -46,16 +46,17 @@ input {
 
 #theme {
   display: none;
-  font-size: 34px;
+  font-size: 18px;
   color: white;
   margin: 0 auto;
   height: 200px;
   width: 20%;
-  margin: 10% 40%; }
+  margin: 10% 40%;
+  text-align: center; }
 
 #go {
   display: none;
-  background: white;
+  background: black;
   color: white;
   text-align: center;
   margin: 0 auto;

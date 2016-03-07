@@ -6,10 +6,6 @@ $(function() {
     this.lastScore = 0;
   };
 
-  var user = {
-    name: 'san',
-  };
-  console.log(user.name);
   var theme = '';
 
   var getImage = function() {
@@ -39,17 +35,14 @@ $(function() {
       $('#name').focus();
     } else if (!emailRegex.test(email) || email.length === 0) {
       $('#email').focus();
-    } else if (localStorage.getItem(name)) {
-      user = localStorage.getItem(name);
-      $(this).hide();
-      $('#theme').show();
-    } else {
-      user = new Player (name, email);
-      localStorage.setItem(name, JSON.stringify(user));
-      $(this).hide();
-      $('#theme').show();
-    }
+    }  else if (localStorage.getItem(name)) {
+      $('#theme').prepend('welcome back ' + name + '! <br> please pick a theme:');
 
+    } else {
+      $('#theme').prepend(name + ', thanks for checking out damla! <br> please pick a theme:');
+    }
+    $(this).hide();
+    $('#theme').show();
   });
 
 
@@ -57,7 +50,7 @@ $(function() {
     console.log(localStorage.getItem(user));
     theme = $(this).val();
     console.log($(this).val());
-    getImage();
+    // getImage();
     $('#below').show('slow');
     $('#theme').hide('slow');
     setTimeout(function() {
@@ -71,8 +64,9 @@ $(function() {
     userSeq: [],
 
     startGame: function() {
-      $('#user').text('user: ' + user.name);
-      $('#level').text('level: ' + this.level);
+      $('#user').text('user : ' + user.name);
+      $('#level').text('level : ' + this.level);
+      getImage();
       $('#go').hide();
       $('#main').show();
       this.seq = [];
@@ -140,7 +134,7 @@ $(function() {
     gameOver: function() {
       var self = this;
       $('#main').hide();
-      $('#go').show('slow').text('great job ' + player.name + '! you made it to level ' + this.level + ' last time you made it to level ' + player.lastScore + '. click this message to play again');
+      $('#go').show('slow').text('great job ' + 'san' + '! you made it to level ' + this.level + ' last time you made it to level ' + '. click this message to play again');
       this.level = 1;
       $(".orb").off('click');
 
