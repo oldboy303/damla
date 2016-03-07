@@ -35,13 +35,17 @@ $(function() {
       $('#name').focus();
     } else if (!emailRegex.test(email) || email.length === 0) {
       $('#email').focus();
-    }  else if (localStorage.getItem(name)) {
-      $('#theme').prepend('welcome back ' + name + '! <br> please pick a theme:');
-    } else {
-      $('#theme').prepend(name + ', thanks for checking out damla! <br> please pick a theme:');
+    }  else {
+      for (var key in localStorage) {
+        if(key === name) {
+          $('#theme').prepend('welcome back ' + name + '! <br> please pick a theme:');
+        } else {
+          $('#theme').prepend(name + ', thanks for checking out damla! <br> please pick a theme:');
+        }
+      }
+      $(this).hide('slow');
+      $('#theme').show('slow');
     }
-    $(this).hide();
-    $('#theme').show();
   });
 
 
@@ -69,8 +73,9 @@ $(function() {
       $('#user').text('user : ' + user.name);
       $('#level').text('level : ' + this.level);
       getImage();
-      $('#go').hide();
-      $('#main').show();
+      $('#go').off('click');
+      $('#go').hide('slow');
+      $('#main').show('slow');
       this.seq = [];
       this.userSeq = [];
       this.seqGen();
@@ -115,6 +120,7 @@ $(function() {
     },
 
     compareSeq: function() {
+      $(".orb").off('click');
       if ((this.seq).join('') === (this.userSeq).join('')) {
         this.levelUp();
       } else {
@@ -131,7 +137,6 @@ $(function() {
       setTimeout(function(){
         damla.seqGen();
       },2000);
-      $(".orb").off('click');
     },
 
     gameOver: function() {
@@ -140,8 +145,9 @@ $(function() {
       $('#below').hide();
       $('#go').show('slow').text('great job ' + 'san' + '! you made it to level ' + this.level + ' last time you made it to level ' + '. click this message to play again');
       this.level = 1;
-      $(".orb").off('click');
-
+      $('#go').click(function(){
+        self.startGame();
+      })
     },
 
     tones: function(orb) {
