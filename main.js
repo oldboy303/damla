@@ -58,7 +58,6 @@ $(function() {
   $('.themes').click(function() {
     console.log(localStorage.getItem(user));
     theme = $(this).val();
-    $('#below').show('slow');
     $('#theme').hide('slow');
     setTimeout(function() {
       damla.startGame();
@@ -82,7 +81,8 @@ $(function() {
     userSeq: [],
 
     startGame: function() {
-      $('#user').text('user : ' + user.name);
+      $('#below').show('slow');
+      $('#user').text('user : ' + currentPlayer.name);
       $('#level').text('level : ' + this.level);
       getImage();
       $('#go').off('click');
