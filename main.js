@@ -1,12 +1,16 @@
 $(function() {
 
+  var theme = '';
+
+  var playerFound = false;
+
+  var currentPlayer = {};
+
   var Player = function(name, email) {
     this.name = name;
     this.email = email;
     this.lastScore = 0;
   };
-
-  var theme = '';
 
   var getImage = function() {
     $.ajax({
@@ -33,21 +37,19 @@ $(function() {
     var email = $('#email').val();
     if (!nameRegex.test(name) || name.length === 0) {
       $('#name').focus();
-    } else if (!emailRegex.test(email) || email.length === 0) {
-      $('#email').focus();
-    }  else {
-      for (var key in localStorage) {
-        if(key === name) {
-          $('#theme').prepend('welcome back ' + name + '! <br> please pick a theme:');
-        } else {
-          $('#theme').prepend(name + ', thanks for checking out damla! <br> please pick a theme:');
-        }
-      }
+    } else if (localStorage.getItem(name)) {
+      currentPlayer = JSON.parse(localStorage.getItem(name));
+      $('#theme').prepend('welcome back ' + name + '! <br> please pick a theme:');
+      $(this).hide('slow');
+      $('#theme').show('slow');
+      playerFound = true;
+    } else {
+      currentPlayer = new Player(name, email);
+      $('#theme').prepend( name + ', thanks for checking the game out! <br> please pick a theme:');
       $(this).hide('slow');
       $('#theme').show('slow');
     }
   });
-
 
   $('.themes').click(function(){
     console.log(localStorage.getItem(user));
