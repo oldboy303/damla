@@ -88,7 +88,6 @@ $(function() {
       $('#go').off('click');
       $('#go').hide('slow');
       $('#main').show('slow');
-      this.level = 1;
       this.seq = [];
       this.userSeq = [];
       this.seqGen();
@@ -166,6 +165,7 @@ $(function() {
       $('#below').hide();
       $('#go').show('slow').text('great job ' + 'san' + '! you made it to level ' + this.level + ' last time you made it to level ' + currentPlayer.lastScore + '. click this message to play again');
       currentPlayer.lastScore = this.level;
+      this.level = 1;
       localStorage.setItem(currentPlayer.name, JSON.stringify(currentPlayer));
       $('#go').click(function() {
         self.startGame();
