@@ -49,8 +49,6 @@ $(function() {
   $('.themes').click(function(){
     console.log(localStorage.getItem(user));
     theme = $(this).val();
-    console.log($(this).val());
-    // getImage();
     $('#below').show('slow');
     $('#theme').hide('slow');
     setTimeout(function() {
@@ -111,6 +109,7 @@ $(function() {
         };
       });
     },
+    
     compareSeq: function() {
       if ((this.seq).join('') === (this.userSeq).join('')) {
         this.levelUp();
@@ -134,6 +133,7 @@ $(function() {
     gameOver: function() {
       var self = this;
       $('#main').hide();
+      $('#below').hide();
       $('#go').show('slow').text('great job ' + 'san' + '! you made it to level ' + this.level + ' last time you made it to level ' + '. click this message to play again');
       this.level = 1;
       $(".orb").off('click');

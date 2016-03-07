@@ -1,13 +1,13 @@
 body {
   font-family: Comfortaa, Verdana, sans-serif;
-  background: black;
-  color: white; }
+  background: white;
+  color: black; }
 
 input {
-  background-color: black;
+  background-color: white;
   border: none;
   border-radius: 5px;
-  color: white;
+  color: black;
   text-align: center;
   height: 40px;
   width: 160px;
@@ -24,21 +24,21 @@ input {
   margin: 10% 30%; }
 
 ::-webkit-input-placeholder {
-  color: white; }
+  color: black; }
 
 :-moz-placeholder {
-  color: white; }
+  color: black; }
 
 ::-moz-placeholder {
-  color: white; }
+  color: black; }
 
 :-ms-input-placeholder {
-  color: white; }
+  color: black; }
 
 #login {
   display: none;
   font-size: 34px;
-  color: white;
+  color: black;
   margin: 0 auto;
   height: 200px;
   width: 20%;
@@ -47,7 +47,7 @@ input {
 #theme {
   display: none;
   font-size: 18px;
-  color: white;
+  color: black;
   margin: 0 auto;
   height: 200px;
   width: 20%;
@@ -56,8 +56,8 @@ input {
 
 #go {
   display: none;
-  background: black;
-  color: white;
+  background: white;
+  color: black;
   text-align: center;
   margin: 0 auto;
   height: 100px;
@@ -72,7 +72,6 @@ input {
   height: 500px;
   width: 100%;
   text-align: center;
-  background-color: white;
   background: white;
   background-size: cover;
   user-select: none;
