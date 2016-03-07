@@ -18,8 +18,12 @@ $(function() {
       type: 'GET',
       dataType: 'json',
       success: function(res) {
-        $('#main').css({'background':'url("' +res.images[0].imageurl + '") no-repeat center'});
-        $('#main').css({'background-size':'cover'});
+        $('#main').css({
+          'background': 'url("' + res.images[0].imageurl + '") no-repeat center'
+        });
+        $('#main').css({
+          'background-size': 'cover'
+        });
       }
     });
   };
@@ -45,13 +49,13 @@ $(function() {
       playerFound = true;
     } else {
       currentPlayer = new Player(name, email);
-      $('#theme').prepend( name + ', thanks for checking the game out! <br> please pick a theme:');
+      $('#theme').prepend(name + ', thanks for checking the game out! <br> please pick a theme:');
       $(this).hide('slow');
       $('#theme').show('slow');
     }
   });
 
-  $('.themes').click(function(){
+  $('.themes').click(function() {
     console.log(localStorage.getItem(user));
     theme = $(this).val();
     $('#below').show('slow');
@@ -60,9 +64,15 @@ $(function() {
       damla.startGame();
     }, 3000)
     if (theme === 'space') {
-      $('#main, #go, body, input').css({'background':'black', 'color':'white'})
+      $('#main, #go, body, input').css({
+        'background': 'black',
+        'color': 'white'
+      })
     } else {
-      $('#main, #go, body, input').css({'background':'green', 'color':'white'})
+      $('#main, #go, body, input').css({
+        'background': 'green',
+        'color': 'white'
+      })
     }
   });
 
@@ -98,7 +108,11 @@ $(function() {
       var self = this;
       var intervalId = setInterval(function() {
         if (seqArr[i]) {
-          $('.orb[data-orb=' + seqArr[i] + ']').animate({'opacity': '1'}).delay(300).animate({'opacity': '.5'});
+          $('.orb[data-orb=' + seqArr[i] + ']').animate({
+            'opacity': '1'
+          }).delay(300).animate({
+            'opacity': '.5'
+          });
           self.tones(seqArr[i]);
           i++;
         } else {
@@ -111,7 +125,12 @@ $(function() {
     userInput: function() {
       var self = this;
       $('.orb').on('click', function() {
-        $(this).animate({'opacity': '1'});$(this).animate({'opacity': '.5'});
+        $(this).animate({
+          'opacity': '1'
+        });
+        $(this).animate({
+          'opacity': '.5'
+        });
         self.tones($(this).data('orb'));
         (self.userSeq).push($(this).data('orb'));
         if ((self.userSeq).length === (self.seq).length) {
@@ -136,9 +155,9 @@ $(function() {
       this.userSeq = [];
       $('#level').text('level : ' + this.level);
       getImage();
-      setTimeout(function(){
+      setTimeout(function() {
         damla.seqGen();
-      },2000);
+      }, 2000);
     },
 
     gameOver: function() {
@@ -147,16 +166,17 @@ $(function() {
       $('#below').hide();
       $('#go').show('slow').text('great job ' + 'san' + '! you made it to level ' + this.level + ' last time you made it to level ' + currentPlayer.lastScore + '. click this message to play again');
       currentPlayer.lastScore = this.level;
-      $('#go').click(function(){
+      localStorage.setItem(currentPlayer.name, JSON.stringify(currentPlayer));
+      $('#go').click(function() {
         self.startGame();
       })
     },
 
     tones: function(orb) {
       var tone = $('<audio autoplay></audio>');
-				tone.append('<source src="sounds/' + theme + '/' + orb + '.ogg" type="audio/ogg" />');
-				tone.append('<source src="sounds/' + theme + '/' + orb + '.mp3" type="audio/mp3" />');
-				$('[data-orb = ' + orb +']').html(tone);
+      tone.append('<source src="sounds/' + theme + '/' + orb + '.ogg" type="audio/ogg" />');
+      tone.append('<source src="sounds/' + theme + '/' + orb + '.mp3" type="audio/mp3" />');
+      $('[data-orb = ' + orb + ']').html(tone);
     },
 
   };
