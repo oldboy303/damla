@@ -41,7 +41,9 @@ $(function() {
     var email = $('#email').val();
     if (!nameRegex.test(name) || name.length === 0) {
       $('#name').focus();
-    } else if (localStorage.getItem(name)) {
+    } else if ((!emailRegex.test(email) || email.length === 0)) {
+      $('#email').focus();
+    }else if (localStorage.getItem(name)) {
       currentPlayer = JSON.parse(localStorage.getItem(name));
       $('#theme').prepend('welcome back ' + name + '! <br> please pick a theme:');
       $(this).hide('slow');
@@ -62,17 +64,13 @@ $(function() {
       damla.startGame();
     }, 3000)
     if (theme === 'space') {
-      theme = 'hubble';
-      $('#main, #go, body, input').css({
-        'background': 'black',
-        'color': 'white'
-      })
+      theme = 'galaxy';
+      $('#main, #go, body, input').css({'background': 'black','color': 'white'});
     } else {
-      $('#main, #go, body, input').css({
-        'background': 'green',
-        'color': 'white'
-      })
+      $('#main, #go, body, input').css({'background': 'green','color': 'white'});
     }
+    getImage();
+    $('#main').show('slow');
   });
 
   var damla = {
@@ -84,10 +82,8 @@ $(function() {
       $('#below').show('slow');
       $('#user').text('user : ' + currentPlayer.name);
       $('#level').text('level : ' + this.level);
-      getImage();
       $('#go').off('click');
       $('#go').hide('slow');
-      $('#main').show('slow');
       this.seq = [];
       this.userSeq = [];
       this.seqGen();
@@ -156,7 +152,7 @@ $(function() {
       getImage();
       setTimeout(function() {
         damla.seqGen();
-      }, 2000);
+      }, 3000);
     },
 
     gameOver: function() {
@@ -168,7 +164,12 @@ $(function() {
       this.level = 1;
       localStorage.setItem(currentPlayer.name, JSON.stringify(currentPlayer));
       $('#go').click(function() {
-        self.startGame();
+        getImage();
+        $('#main').show('slow')
+        setTimeout(function(){
+          self.startGame();
+          this.hide('slow');
+        }, 3000)
       })
     },
 
