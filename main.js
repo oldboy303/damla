@@ -165,7 +165,7 @@ $(function() {
       localStorage.setItem(currentPlayer.name, JSON.stringify(currentPlayer));
       $('#go').click(function() {
         getImage();
-        $('#main').show('slow')
+        $('#main').show('slow');
         $(this).hide('slow');
         setTimeout(function(){
           self.startGame();
