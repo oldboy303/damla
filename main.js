@@ -159,7 +159,7 @@ $(function() {
       var self = this;
       $('#main').hide();
       $('#below').hide();
-      $('#go').show('slow').text('great job ' + 'san' + '! you made it to level ' + this.level + ' last time you made it to level ' + currentPlayer.lastScore + '. click this message to play again');
+      $('#go').show('slow').text('great job ' + currentPlayer.name + '! you made it to level ' + this.level + ' last time you made it to level ' + currentPlayer.lastScore + '. click this message to play again');
       currentPlayer.lastScore = this.level;
       this.level = 1;
       localStorage.setItem(currentPlayer.name, JSON.stringify(currentPlayer));
