@@ -166,9 +166,9 @@ $(function() {
       $('#go').click(function() {
         getImage();
         $('#main').show('slow')
+        $(this).hide('slow');
         setTimeout(function(){
           self.startGame();
-          this.hide('slow');
         }, 3000)
       })
     },
