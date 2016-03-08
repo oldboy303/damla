@@ -56,13 +56,13 @@ $(function() {
   });
 
   $('.themes').click(function() {
-    console.log(localStorage.getItem(user));
     theme = $(this).val();
     $('#theme').hide('slow');
     setTimeout(function() {
       damla.startGame();
     }, 3000)
     if (theme === 'space') {
+      theme = 'hubble';
       $('#main, #go, body, input').css({
         'background': 'black',
         'color': 'white'
