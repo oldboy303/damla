@@ -18,12 +18,8 @@ $(function() {
       type: 'GET',
       dataType: 'json',
       success: function(res) {
-        $('#main').css({
-          'background': 'url("' + res.images[0].imageurl + '") no-repeat center'
-        });
-        $('#main').css({
-          'background-size': 'cover'
-        });
+        $('#main').css({'background': 'url("' + res.images[0].imageurl + '") no-repeat center'});
+        $('#main').css({'background-size': 'cover'});
       }
     });
   };
